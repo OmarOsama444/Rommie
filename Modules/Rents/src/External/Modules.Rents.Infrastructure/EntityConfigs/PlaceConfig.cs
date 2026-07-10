@@ -12,6 +12,10 @@ public class PlaceConfig : IEntityTypeConfiguration<Place>
 
         builder.HasIndex(p => p.GovernorateId);
 
+        builder.HasOne(x => x.Governorate)
+            .WithMany(x => x.Places)
+            .HasForeignKey(x => x.GovernorateId);
+
         builder.Property(p => p.Title)
             .IsRequired()
             .HasMaxLength(200);

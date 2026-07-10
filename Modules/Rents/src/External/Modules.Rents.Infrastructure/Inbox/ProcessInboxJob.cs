@@ -27,7 +27,7 @@ public class ProcessInboxJob(
         await using DbConnection dbConnection = await dbConnectionFactory.CreateSqlConnection();
         await using DbTransaction dbTransaction = await dbConnection.BeginTransactionAsync();
         var inbox_messages = await GetinboxMessagesAsync(dbConnection, dbTransaction);
-        logger.LogInformation("Beginning to process inbox messages");
+        // logger.LogInformation("Beginning to process inbox messages");
 
         foreach (InboxMessage inboxMessage in inbox_messages)
         {
@@ -65,7 +65,7 @@ public class ProcessInboxJob(
             }
         }
         await dbTransaction.CommitAsync();
-        logger.LogInformation("Completed processing the inbox message ");
+        // logger.LogInformation("Completed processing the inbox message ");
     }
     private async Task<IReadOnlyCollection<InboxMessage>> GetinboxMessagesAsync(
         IDbConnection connection,

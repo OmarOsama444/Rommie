@@ -28,7 +28,7 @@ public class ProcessOutboxJob(
         await using DbConnection dbConnection = await dbConnectionFactory.CreateSqlConnection();
         await using DbTransaction dbTransaction = await dbConnection.BeginTransactionAsync();
         var outbox_messages = await GetOutboxMessagesAsync(dbConnection, dbTransaction);
-        logger.LogInformation("Beginning to process outbox messages");
+        // logger.LogInformation("Beginning to process outbox messages");
 
         foreach (OutboxMessage outboxMessage in outbox_messages)
         {
@@ -65,7 +65,7 @@ public class ProcessOutboxJob(
             }
         }
         await dbTransaction.CommitAsync();
-        logger.LogInformation("Completed processing the outbox message ");
+        // logger.LogInformation("Completed processing the outbox message ");
     }
     private async Task<IReadOnlyCollection<OutboxMessage>> GetOutboxMessagesAsync(
         IDbConnection connection,

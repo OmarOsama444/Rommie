@@ -3,7 +3,7 @@ version: '3.9'
 services:
   database:
     image: postgis/postgis:17-3.5
-    container_name: trpr.Database
+    container_name: database
     environment:
       - POSTGRES_DB=trpr
       - POSTGRES_USER=postgres
@@ -14,17 +14,17 @@ services:
       - "15432:5432"
     mem_limit: 256m
     cpus: 0.25
-  trpr.backend:
-    build:
-      dockerfile: Dockerfile
-    container_name: trpr.backend
-    env_file:
-      - .env
-    ports:
-      - "5001:8080"
-  trpr.minio:
+  # trpr.backend:
+  #   build:
+  #     dockerfile: Dockerfile
+  #   container_name: trpr.backend
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "5001:8080"
+  minio:
     image: minio/minio:latest
-    container_name: trpr.minio
+    container_name: minio
     ports:
       - "9000:9000" # API
       - "9001:9001" # Web Console
