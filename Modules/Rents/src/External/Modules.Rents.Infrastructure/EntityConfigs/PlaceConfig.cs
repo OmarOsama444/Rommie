@@ -1,0 +1,41 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Modules.Rents.Domain.Entities;
+
+namespace Modules.Rents.Infrastructure.EntityConfigs;
+
+public class PlaceConfig : IEntityTypeConfiguration<Place>
+{
+    public void Configure(EntityTypeBuilder<Place> builder)
+    {
+        builder.HasKey(p => p.Id);
+
+        builder.HasIndex(p => p.GovernorateId);
+
+        builder.Property(p => p.Title)
+            .IsRequired()
+            .HasMaxLength(200);
+
+        builder.Property(p => p.Description)
+            .IsRequired()
+            .HasMaxLength(2000);
+
+        builder.Property(p => p.Rating);
+
+        builder.Property(p => p.RateCount)
+            .HasDefaultValue(0);
+
+        builder.Property(p => p.Location)
+            .HasColumnType("geography (Point, 4326)");
+
+        builder.HasIndex(p => p.Location)
+            .HasMethod("GIST");
+
+        builder
+            .HasOne(p => p.Governorate)
+            .WithMany()
+            .HasForeignKey(p => p.GovernorateId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+    }
+}

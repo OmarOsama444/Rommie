@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Conversations\src\External\Modules.Conversations.Contracts\Modules.Conversations.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Payments\src\External\Modules.Payments.Contracts\Modules.Payments.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Users\src\External\Modules.Users.Contracts\Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="..\Modules.Rents.Domain\Modules.Rents.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\External\Modules.Rents.Contracts\Modules.Rents.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Notifications\src\External\Modules.Notifications.Contracts\Modules.Notifications.Contracts.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgis/postgis:17-3.5
+    container_name: trpr.Database
+    environment:
+      - POSTGRES_DB=trpr
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./containers/postgresql/data/:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    mem_limit: 256m
+    cpus: 0.25
+  trpr.backend:
+    build:
+      dockerfile: Dockerfile
+    container_name: trpr.backend
+    env_file:
+      - .env
+    ports:
+      - "5001:8080"
+  trpr.minio:
+    image: minio/minio:latest
+    container_name: trpr.minio
+    ports:
+      - "9000:9000" # API
+      - "9001:9001" # Web Console
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    volumes:
+      - ./containers/minio/data:/data
+    command: server /data --console-address ":9001"
